@@ -1,838 +1,1007 @@
-[
-  {
-    "type": "container",
-    "title": "Registry",
-    "description": "Docker image registry",
-    "categories": ["docker"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/registry.png",
-    "image": "registry:latest",
-    "ports": [
-      "5000/tcp"
-    ],
-    "volumes": ["/var/lib/registry"]
-  },
-  {
-    "type": "container",
-    "title": "Nginx",
-    "description": "High performance web server",
-    "categories": ["webserver"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/nginx.png",
-    "image": "nginx:latest",
-    "ports": [
-      "80/tcp",
-      "443/tcp"
-    ],
-    "volumes": ["/etc/nginx", "/usr/share/nginx/html"]
-  },
-  {
-    "type": "container",
-    "title": "Httpd",
-    "description": "Open-source HTTP server",
-    "categories": ["webserver"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/httpd.png",
-    "image": "httpd:latest",
-    "ports": [
-      "80/tcp"
-    ],
-    "volumes": ["/usr/local/apache2/htdocs/"]
-  },
-  {
-    "type": "container",
-    "title": "Caddy",
-    "description": "HTTP/2 web server with automatic HTTPS",
-    "categories": ["webserver"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/caddy.png",
-    "image": "abiosoft/caddy:latest",
-    "ports": [
-      "80/tcp", "443/tcp", "2015/tcp"
-    ],
-    "volumes": ["/root/.caddy"]
-  },
-  {
-    "type": "container",
-    "title": "MySQL",
-    "description": "The most popular open-source database",
-    "categories": ["database"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mysql.png",
-    "image": "mysql:latest",
-    "env": [
-      {
-        "name": "MYSQL_ROOT_PASSWORD",
-        "label": "Root password"
-      }
-    ],
-    "ports": [
-      "3306/tcp"
-    ],
-    "volumes": ["/var/lib/mysql"]
-  },
-  {
-    "type": "container",
-    "title": "MariaDB",
-    "description": "Performance beyond MySQL",
-    "categories": ["database"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mariadb.png",
-    "image": "mariadb:latest",
-    "env": [
-      {
-        "name": "MYSQL_ROOT_PASSWORD",
-        "label": "Root password"
-      }
-    ],
-    "ports": [
-      "3306/tcp"
-    ],
-    "volumes": ["/var/lib/mysql"]
-  },
-  {
-    "type": "container",
-    "title": "PostgreSQL",
-    "description": "The most advanced open-source database",
-    "categories": ["database"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/postgres.png",
-    "image": "postgres:latest",
-    "env": [
-      {
-        "name": "POSTGRES_USER",
-        "label": "Superuser"
-      },
-      {
-        "name": "POSTGRES_PASSWORD",
-        "label": "Superuser password"
-      }
-    ],
-    "ports": [
-      "5432/tcp"
-    ],
-    "volumes": ["/var/lib/postgresql/data"]
-  },
-  {
-    "type": "container",
-    "title": "Mongo",
-    "description": "Open-source document-oriented database",
-    "categories": ["database"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mongo.png",
-    "image": "mongo:latest",
-    "ports": [
-      "27017/tcp"
-    ],
-    "volumes": ["/data/db"]
-  },
-  {
-    "type": "container",
-    "title": "CockroachDB",
-    "description": "An open-source, survivable, strongly consistent, scale-out SQL database",
-    "categories": ["database"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cockroachdb.png",
-    "image": "cockroachdb/cockroach:latest",
-    "ports": [
-      "26257/tcp",
-      "8080/tcp"
-    ],
-    "volumes": ["/cockroach/cockroach-data"],
-    "command": "start --insecure"
-  },
-  {
-    "type": "container",
-    "title": "CrateDB",
-    "description": "An open-source distributed SQL database",
-    "categories": ["database"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cratedb.png",
-    "image": "crate:latest",
-    "ports": [
-      "4200/tcp",
-      "4300/tcp"
-    ],
-    "volumes": ["/data"]
-  },
-  {
-    "type": "container",
-    "title": "Elasticsearch",
-    "description": "Open-source search and analytics engine",
-    "categories": ["database"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/elasticsearch.png",
-    "image": "elasticsearch:latest",
-    "ports": [
-      "9200/tcp",
-      "9300/tcp"
-    ],
-    "volumes": ["/usr/share/elasticsearch/data"]
-  },
-  {
-    "type": "container",
-    "title": "Gitlab CE",
-    "description": "Open-source end-to-end software development platform",
-    "note": "Default username is <b>root</b>. Check the <a href=\"https://docs.gitlab.com/omnibus/docker/README.html#after-starting-a-container\" target=\"_blank\">Gitlab documentation</a> to get started.",
-    "categories": ["development", "project-management"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/gitlab_ce.png",
-    "image": "gitlab/gitlab-ce:latest",
-    "ports": [
-      "80/tcp",
-      "443/tcp",
-      "22/tcp"
-    ],
-    "volumes": [
-      { "container": "/etc/gitlab" },
-      { "container": "/var/log/gitlab" },
-      { "container": "/var/opt/gitlab" }
-    ]
-  },
-  {
-    "type": "container",
-    "title": "Minio",
-    "description": "A distributed object storage server built for cloud applications and devops",
-    "categories": ["storage"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/minio.png",
-    "image": "minio/minio:latest",
-    "ports": [
-      "9000/tcp"
-    ],
-    "env": [
-      {
-        "name": "MINIO_ACCESS_KEY",
-        "label": "Minio access key"
-      },
-      {
-        "name": "MINIO_SECRET_KEY",
-        "label": "Minio secret key"
-      }
-    ],
-    "volumes": ["/data", "/root/.minio"],
-    "command": "server /data"
-  },
-  {
-    "type": "container",
-    "title": "Scality S3",
-    "description": "Standalone AWS S3 protocol server",
-    "categories": ["storage"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/scality-s3.png",
-    "image": "scality/s3server",
-    "ports": [
-      "8000/tcp"
-    ],
-    "env": [
-      {
-        "name": "SCALITY_ACCESS_KEY",
-        "label": "Scality S3 access key"
-      },
-      {
-        "name": "SCALITY_SECRET_KEY",
-        "label": "Scality S3 secret key"
-      }
-    ],
-    "volumes": ["/usr/src/app/localData", "/usr/src/app/localMetadata"]
-  },
-  {
-    "type": "container",
-    "title": "SQL Server",
-    "description": "Microsoft SQL Server on Linux",
-    "categories": ["database"],
-    "platform": "linux",
-    "note": "Password needs to include at least 8 characters including uppercase, lowercase letters, base-10 digits and/or non-alphanumeric symbols.",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/microsoft.png",
-    "image": "microsoft/mssql-server-linux:2017-GA",
-    "ports": [
-      "1433/tcp"
-    ],
-    "env": [
-      {
-        "name": "ACCEPT_EULA",
-        "set": "Y"
-      },
-      {
-        "name": "SA_PASSWORD",
-        "label": "SA password"
-      }
-    ]
-  },
-  {
-    "type": "container",
-    "title": "SQL Server",
-    "description": "Microsoft SQL Server Developer for Windows containers",
-    "categories": ["database"],
-    "platform": "windows",
-    "note": "Password needs to include at least 8 characters including uppercase, lowercase letters, base-10 digits and/or non-alphanumeric symbols.",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/microsoft.png",
-    "image": "microsoft/mssql-server-windows-developer:latest",
-    "ports": [
-      "1433/tcp"
-    ],
-    "env": [
-      {
-        "name": "ACCEPT_EULA",
-        "set": "Y"
-      },
-      {
-        "name": "sa_password",
-        "label": "SA password"
-      }
-    ],
-    "volumes": ["C:/temp/"]
-  },
-  {
-    "type": "container",
-    "title": "SQL Server Express",
-    "description": "Microsoft SQL Server Express for Windows containers",
-    "categories": ["database"],
-    "platform": "windows",
-    "note": "Password needs to include at least 8 characters including uppercase, lowercase letters, base-10 digits and/or non-alphanumeric symbols.",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/microsoft.png",
-    "image": "microsoft/mssql-server-windows-express:latest",
-    "ports": [
-      "1433/tcp"
-    ],
-    "env": [
-      {
-        "name": "ACCEPT_EULA",
-        "set": "Y"
-      },
-      {
-        "name": "sa_password",
-        "label": "SA password"
-      }
-    ],
-    "volumes": ["C:/temp/"]
-  },
-  {
-    "type": "container",
-    "title": "IronFunctions API",
-    "description": "Open-source serverless computing platform",
-    "categories": ["serverless"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ironfunctions.png",
-    "image": "iron/functions:latest",
-    "ports": [
-      "8080/tcp"
-    ],
-    "volumes": ["/app/data"],
-    "privileged": true
-  },
-  {
-    "type": "container",
-    "title": "IronFunctions UI",
-    "description": "Open-source user interface for IronFunctions",
-    "categories": ["serverless"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ironfunctions.png",
-    "image": "iron/functions-ui:latest",
-    "ports": [
-      "4000/tcp"
-    ],
-    "volumes": ["/app/data"],
-    "env": [
-      {
-        "name": "API_URL",
-        "label": "API URL"
-      }
-    ],
-    "privileged": true
-  },
-  {
-    "type": "container",
-    "title": "Solr",
-    "description": "Open-source enterprise search platform",
-    "categories": ["search-engine"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/solr.png",
-    "image": "solr:latest",
-    "ports": [
-      "8983/tcp"
-    ],
-    "volumes": ["/opt/solr/mydata"]
-  },
-  {
-    "type": "container",
-    "title": "Redis",
-    "description": "Open-source in-memory data structure store",
-    "categories": ["database"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/redis.png",
-    "image": "redis:latest",
-    "ports": [
-      "6379/tcp"
-    ],
-    "volumes": ["/data"]
-  },
-  {
-    "type": "container",
-    "title": "RabbitMQ",
-    "description": "Highly reliable enterprise messaging system",
-    "categories": ["messaging"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/rabbitmq.png",
-    "image": "rabbitmq:latest",
-    "ports": [
-      "5671/tcp",
-      "5672/tcp"
-    ],
-    "volumes": ["/var/lib/rabbitmq"]
-  },
-  {
-    "type": "container",
-    "title": "Ghost",
-    "description": "Free and open-source blogging platform",
-    "categories": ["blog"],
-    "note": "Access the blog management interface under <code>/ghost/</code>.",
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ghost.png",
-    "image": "ghost:latest",
-    "ports": [
-      "2368/tcp"
-    ],
-    "volumes": ["/var/lib/ghost/content"]
-  },
-  {
-    "type": "container",
-    "title": "Plesk",
-    "description": "WebOps platform and hosting control panel",
-    "categories": ["CMS"],
-    "platform": "linux",
-    "note": "Default credentials: admin / changeme",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/plesk.png",
-    "image": "plesk/plesk:preview",
-    "ports": [
-      "21/tcp", "80/tcp", "443/tcp", "8880/tcp", "8443/tcp", "8447/tcp"
-    ]
-  },
-  {
-    "type": "container",
-    "title": "WordPress",
-    "description": "A free and open-source CMS",
-    "categories": ["CMS"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/wordpress.png",
-    "image": "wordpress:latest",
-    "env": [
-      {
-        "name": "WORDPRESS_DB_HOST",
-        "label": "MySQL database host",
-        "type": "container"
-      },
-      {
-        "name": "WORDPRESS_DB_PASSWORD",
-        "label": "Database password"
-      }
-    ],
-    "ports": [
-      "80/tcp"
-    ],
-    "volumes": ["/var/www/html"]
-  },
-  {
-    "type": "container",
-    "title": "Joomla",
-    "description": "Another free and open-source CMS",
-    "categories": ["CMS"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/joomla.png",
-    "image": "joomla:latest",
-    "env": [
-      {
-        "name": "JOOMLA_DB_HOST",
-        "label": "MySQL database host",
-        "type": "container"
-      },
-      {
-        "name": "JOOMLA_DB_PASSWORD",
-        "label": "Database password"
-      }
-    ],
-    "ports": [
-      "80/tcp"
-    ],
-    "volumes": ["/var/www/html"]
-  },
-  {
-    "type": "container",
-    "title": "Drupal",
-    "description": "Open-source content management framework",
-    "categories": ["CMS"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/drupal.png",
-    "image": "drupal:latest",
-    "ports": [
-      "80/tcp"
-    ],
-    "volumes": ["/var/www/html"]
-  },
-  {
-    "type": "container",
-    "title": "Plone",
-    "description": "A free and open-source CMS built on top of Zope",
-    "categories": ["CMS"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/plone.png",
-    "image": "plone:latest",
-    "ports": [
-      "8080/tcp"
-    ],
-    "volumes": ["/data"]
-  },
-  {
-    "type": "container",
-    "title": "Magento 2",
-    "description": "Open-source e-commerce platform",
-    "categories": ["CMS"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/magento.png",
-    "image": "alankent/gsd:latest",
-    "ports": [
-      "80/tcp",
-      "3000/tcp",
-      "3001/tcp"
-    ],
-    "volumes": ["/var/www/html/"]
-  },
-  {
-    "type": "container",
-    "title": "Sematext Docker Agent",
-    "description": "Collect logs, metrics and docker events",
-    "categories": ["Log Management", "Monitoring"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/sematext_agent.png",
-    "image": "sematext/sematext-agent-docker:latest",
-    "name": "sematext-agent",
-    "privileged": true,
-    "env": [
-      {
-        "name": "LOGSENE_TOKEN",
-        "label": "Logs token"
-      },
-      {
-        "name": "SPM_TOKEN",
-        "label": "SPM monitoring token"
-      }
-    ],
-    "volumes": [
-      {
-        "container": "/var/run/docker.sock",
-        "bind": "/var/run/docker.sock"
-      }
-    ]
-  },
-  {
-    "type": "container",
-    "title": "Mautic",
-    "description": "Open-source marketing automation platform",
-    "categories": ["marketing"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/mautic.png",
-    "image": "mautic/mautic:latest",
-    "env": [
-      {
-        "name": "MAUTIC_DB_HOST",
-        "label": "MySQL database host",
-        "type": "container"
-      },
-      {
-        "name": "MAUTIC_DB_PASSWORD",
-        "label": "Database password"
-      }
-    ],
-    "ports": [
-      "80/tcp"
-    ],
-    "volumes": ["/var/www/html"]
-  },
-  {
-    "type": "container",
-    "title": "Wowza",
-    "description": "Streaming media server",
-    "categories": ["streaming"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/wowza.png",
-    "image": "sameersbn/wowza:4.1.2-8",
-    "env": [
-      {
-        "name": "WOWZA_ACCEPT_LICENSE",
-        "label": "Agree to Wowza EULA",
-        "set": "yes"
-      },
-      {
-        "name": "WOWZA_KEY",
-        "label": "License key"
-      }
-    ],
-    "ports": [
-      "1935/tcp",
-      "8086/tcp",
-      "8087/tcp",
-      "8088/tcp"
-    ],
-    "volumes": ["/var/lib/wowza"]
-  },
-  {
-    "type": "container",
-    "title": "Jenkins",
-    "description": "Open-source continuous integration tool",
-    "categories": ["continuous-integration"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/jenkins.png",
-    "image": "jenkins/jenkins:lts",
-    "ports": [
-      "8080/tcp",
-      "50000/tcp"
-    ],
-    "env": [
-      {
-        "name": "JENKINS_OPTS",
-        "label": "Jenkins options"
-      }
-    ],
-    "volumes": ["/var/jenkins_home"]
-  },
-  {
-    "type": "container",
-    "title": "Redmine",
-    "description": "Open-source project management tool",
-    "categories": ["project-management"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/redmine.png",
-    "image": "redmine:latest",
-    "ports": [
-      "3000/tcp"
-    ],
-    "volumes": ["/usr/src/redmine/files"]
-  },
-  {
-    "type": "container",
-    "title": "Odoo",
-    "description": "Open-source business apps",
-    "categories": ["project-management"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/odoo.png",
-    "image": "odoo:latest",
-    "env": [
-      {
-        "name": "HOST",
-        "label": "PostgreSQL database host",
-        "type": "container"
-      },
-      {
-        "name": "USER",
-        "label": "Database user"
-      },
-      {
-        "name": "PASSWORD",
-        "label": "Database password"
-      }
-    ],
-    "ports": [
-      "8069/tcp"
-    ],
-    "volumes": ["/var/lib/odoo", "/mnt/extra-addons"]
-  },
-  {
-    "type": "container",
-    "title": "Urbackup",
-    "description": "Open-source network backup",
-    "categories": ["backup"],
-    "platform": "linux",
-    "note": "This application web interface is exposed on the port 55414 inside the container.",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/urbackup.png",
-    "image": "cfstras/urbackup",
-    "ports": [
-      "55413/tcp", "55414/tcp", "55415/tcp", "35622/tcp"
-    ],
-    "volumes": ["/var/urbackup"]
-  },
-  {
-    "type": "container",
-    "title": "File browser",
-    "description": "A web file manager",
-    "note": "Default credentials: admin/admin",
-    "categories": ["filesystem", "storage"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/filebrowser.png",
-    "image": "hacdias/filemanager:latest",
-    "ports": [
-      "80/tcp"
-    ],
-    "volumes": ["/data", "/srv"],
-    "command": "--port 80 --database /data/database.db --scope /srv"
-  },
-  {
-    "type": "container",
-    "title": "CommandBox",
-    "description": "ColdFusion (CFML) CLI",
-    "categories": ["development"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-commandbox.png",
-    "image": "ortussolutions/commandbox:latest",
-    "env": [
-      {
-        "name": "CFENGINE",
-        "set": "lucee@4.5"
-      }
-    ],
-    "ports": [
-      "8080/tcp", "8443/tcp"
-    ]
-  },
-  {
-    "type": "container",
-    "title": "ContentBox",
-    "description": "Open-source modular CMS",
-    "categories": ["CMS"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ortussolutions-contentbox.png",
-    "image": "ortussolutions/contentbox:latest",
-    "env": [
-      {
-        "name": "express",
-        "set": "true"
-      },
-      {
-        "name": "install",
-        "set": "true"
-      },
-      {
-        "name": "CFENGINE",
-        "set": "lucee@4.5"
-      }
-    ],
-    "ports": [
-      "8080/tcp", "8443/tcp"
-    ],
-    "volumes": ["/data/contentbox/db", "/app/includes/shared/media"]
-  },
-  {
-    "type": "stack",
-    "title": "Portainer Agent",
-    "description": "Manage all the resources in your Swarm cluster",
-    "note": "The agent will be deployed globally inside your cluster and available on port 9001.",
-    "categories": ["portainer"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/portainer.png",
-    "repository": {
-      "url": "https://github.com/portainer/templates",
-      "stackfile": "stacks/portainer-agent/docker-stack.yml"
-    }
-  },
-  {
-    "type": "stack",
-    "title": "OpenFaaS",
-    "name": "func",
-    "description": "Serverless functions made simple",
-    "note": "Deploys the API gateway and sample functions. You can access the UI on port 8080. <b>Warning</b>: the name of the stack must be 'func'.",
-    "categories": ["serverless"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/openfaas.png",
-    "repository": {
-      "url": "https://github.com/openfaas/faas",
-      "stackfile": "docker-compose.yml"
-    }
-  },
-  {
-    "type": "stack",
-    "title": "IronFunctions",
-    "description": "Open-source serverless computing platform",
-    "note": "Deploys the IronFunctions API and UI.",
-    "categories": ["serverless"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ironfunctions.png",
-    "repository": {
-      "url": "https://github.com/portainer/templates",
-      "stackfile": "stacks/ironfunctions/docker-stack.yml"
-    }
-  },
-  {
-    "type": "stack",
-    "title": "CockroachDB",
-    "description": "CockroachDB cluster",
-    "note": "Deploys an insecure CockroachDB cluster, please refer to <a href=\"https://www.cockroachlabs.com/docs/stable/orchestrate-cockroachdb-with-docker-swarm.html\" target=\"_blank\">CockroachDB documentation</a> for production deployments.",
-    "categories": ["database"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/cockroachdb.png",
-    "repository": {
-      "url": "https://github.com/portainer/templates",
-      "stackfile": "stacks/cockroachdb/docker-stack.yml"
-    }
-  },
-  {
-    "type": "stack",
-    "title": "Wordpress",
-    "description": "Wordpress setup with a MySQL database",
-    "note": "Deploys a Wordpress instance connected to a MySQL database.",
-    "categories": ["CMS"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/wordpress.png",
-    "repository": {
-      "url": "https://github.com/portainer/templates",
-      "stackfile": "stacks/wordpress/docker-stack.yml"
-    },
-    "env": [
-      {
-        "name": "MYSQL_ROOT_PASSWORD",
-        "label": "Database root password",
-        "description": "Password used by the MySQL root user."
-      }
-    ]
-  },
-  {
-    "type": "stack",
-    "title": "Microsoft OMS Agent",
-    "description": "Microsoft Operations Management Suite Linux agent.",
-    "categories": ["OPS"],
-    "platform": "linux",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/microsoft.png",
-    "repository": {
-      "url": "https://github.com/portainer/templates",
-      "stackfile": "stacks/microsoft-oms/docker-stack.yml"
-    },
-    "env": [
-      {
-        "name": "AZURE_WORKSPACE_ID",
-        "label": "Workspace ID",
-        "description": "Azure Workspace ID"
-      },
-      {
-        "name": "AZURE_PRIMARY_KEY",
-        "label": "Primary key",
-        "description": "Azure primary key"
-      }
-    ]
-  },
-  {
-    "title": "Sematext Docker Agent",
-    "type": "stack",
-    "categories": ["Log Management", "Monitoring"],
-    "description": "Collect logs, metrics and docker events",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/sematext_agent.png",
-    "platform": "linux",
-    "repository": {
-      "url": "https://github.com/portainer/templates",
-      "stackfile": "stacks/sematext-agent-docker/docker-stack.yml"
-    },
-    "env": [
-      {
-        "name": "LOGSENE_TOKEN",
-        "label": "Logs token"
-      },
-      {
-        "name": "SPM_TOKEN",
-        "label": "SPM monitoring token"
-      }
-    ],
-    "volumes": [
-      {
-        "container": "/var/run/docker.sock",
-        "bind": "/var/run/docker.sock"
-      }
-    ]
-  }
-]
+{
+	"version": "2",
+	"templates": [
+		{
+			"description": "Calibre",
+			"env": [
+				{
+					"default": "65534",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "65533",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/calibre",
+			"logo": "https://raw.githubusercontent.com/kovidgoyal/calibre/master/resources/images/lt.png",
+			"name": "calibre",
+			"ports": [
+				"5719:8080/tcp",
+				"6443:8081/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Calibre",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/media/books/calibre",
+					"container": "/config"
+				}
+			]
+		},
+		{
+			"description": "Calibre Web",
+			"env": [
+				{
+					"default": "65534",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "65533",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/calibre-web",
+			"logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/calibre-web-icon.png",
+			"name": "calibre-web",
+			"ports": [
+				"5850:8083/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Calibre Web",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/containers/calibre-web/config",
+					"container": "/config"
+				},
+				{
+					"bind": "/mnt/data/media/books/calibre/lochnasmonster",
+					"container": "/books"
+				}
+			]
+		},
+		{
+			"description": "DuckDNS Dynamic DNS Updater",
+			"env": [
+				{
+					"default": "65534",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "65533",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"default": "nmartinez",
+					"label": "SUBDOMAINS",
+					"name": "SUBDOMAINS"
+				},
+				{
+					"default": "21714e22-f7c4-4bb1-9ab9-53c37839a8c2",
+					"label": "TOKEN",
+					"name": "TOKEN"
+				}
+				
+			],
+			"image": "linuxserver/duckdns",
+			"logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/duckdns.png",
+			"name": "duckdns",
+			"restart_policy": "unless-stopped",
+			"title": "DuckDNS",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"description": "FTP",
+			"env": [
+				{
+					"default": "user",
+					"label": "FTP_USER",
+					"name": "FTP_USER"
+				},
+				{
+					"default": "kungfupanda",
+					"label": "FTP_PASS",
+					"name": "FTP_PASS"
+				},
+				{
+					"default": "localhost",
+					"label": "PASV_ADDRESS",
+					"name": "PASV_ADDRESS"
+				}
+			],
+			"image": "bogem/ftp",
+			"logo": "https://cdn.iconscout.com/icon/free/png-512/ftp-1668437-1416763.png",
+			"name": "ftp",
+			"note": "Publish 47400-47470 after install",
+			"ports": [
+				"42720:20/tcp",
+				"42721:21/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "FTP (bogem/ftp)",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/ftp",
+					"container": "/home/vsftpd",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"description": "FTP",
+			"env": [
+				{
+					"default": "user",
+					"label": "FTP_USER",
+					"name": "FTP_USER"
+				},
+				{
+					"default": "kungfupanda",
+					"label": "FTP_PASS",
+					"name": "FTP_PASS"
+				}
+			],
+			"image": "metabrainz/docker-anon-ftp",
+			"logo": "https://cdn.iconscout.com/icon/free/png-512/ftp-1668437-1416763.png",
+			"name": "ftp",
+			"note": "Publish 20-21 and 65500-65515",
+			"restart_policy": "unless-stopped",
+			"title": "FTP (docker-anon-ftp)",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/ftp",
+					"container": "/var/ftp",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"description": "FTP",
+			"env": [
+				{
+					"default": "user",
+					"label": "FTP_USER",
+					"name": "FTP_USER"
+				},
+				{
+					"default": "kungfupanda",
+					"label": "FTP_PASS",
+					"name": "FTP_PASS"
+				}
+			],
+			"image": "stilliard/pure-ftpd",
+			"logo": "https://cdn.iconscout.com/icon/free/png-512/ftp-1668437-1416763.png",
+			"name": "ftp",
+			"note": "Publish 30000-30009 after creation",
+			"ports": [
+				"42785:21/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "FTP (pure-ftpd)",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/ftp",
+					"container": "/ftp-home",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"description": "Handbrake",
+			"env": [
+				{
+					"default": "65534",
+					"label": "USER_ID",
+					"name": "USER_ID"
+				},
+				{
+					"default": "65533",
+					"label": "GROUP_ID",
+					"name": "GROUP_ID"
+				},
+				{
+					"default": "000",
+					"label": "UMASK",
+					"name": "UMASK"
+				},
+				{
+					"default": "1",
+					"label": "CLEAN_TMP_DIR",
+					"name": "CLEAN_TMP_DIR"
+				},
+				{
+					"default": "Noe/H.265_16RF",
+					"label": "AUTOMATED_CONVERSION_PRESET",
+					"name": "AUTOMATED_CONVERSION_PRESET"
+				},
+				{
+					"default": "mkv",
+					"label": "AUTOMATED_CONVERSION_FORMAT",
+					"name": "AUTOMATED_CONVERSION_FORMAT"
+				},
+				{
+					"default": "H.265_16RF",
+					"label": "AUTOMATED_CONVERSION_OUTPUT_SUBDIR",
+					"name": "AUTOMATED_CONVERSION_OUTPUT_SUBDIR"
+				},
+				{
+					"default": "20",
+					"label": "AUTOMATED_CONVERSION_SOURCE_STABLE_TIME",
+					"name": "AUTOMATED_CONVERSION_SOURCE_STABLE_TIME"
+				},
+				{
+					"default": "--subtitle none --audio none",
+					"label": "AUTOMATED_CONVERSION_HANDBRAKE_CUSTOM_ARGS",
+					"name": "AUTOMATED_CONVERSION_HANDBRAKE_CUSTOM_ARGS"
+				},
+				{
+					"default": "Noe/H.265_18RF",
+					"label": "AUTOMATED_CONVERSION_PRESET_2",
+					"name": "AUTOMATED_CONVERSION_PRESET_2"
+				},
+				{
+					"default": "H.265_18RF",
+					"label": "AUTOMATED_CONVERSION_OUTPUT_SUBDIR_2",
+					"name": "AUTOMATED_CONVERSION_OUTPUT_SUBDIR_2"
+				},
+				{
+					"default": "Noe/H.265_20RF",
+					"label": "AUTOMATED_CONVERSION_PRESET_3",
+					"name": "AUTOMATED_CONVERSION_PRESET_3"
+				},
+				{
+					"default": "H.265_20RF",
+					"label": "AUTOMATED_CONVERSION_OUTPUT_SUBDIR_3",
+					"name": "AUTOMATED_CONVERSION_OUTPUT_SUBDIR_3"
+				},
+				{
+					"default": "Noe/H.265_custom",
+					"label": "AUTOMATED_CONVERSION_PRESET_4",
+					"name": "AUTOMATED_CONVERSION_PRESET_4"
+				},
+				{
+					"default": "H.265_custom",
+					"label": "AUTOMATED_CONVERSION_OUTPUT_SUBDIR_4",
+					"name": "AUTOMATED_CONVERSION_OUTPUT_SUBDIR_4"
+				},
+				{
+					"default": "mp4",
+					"label": "AUTOMATED_CONVERSION_FORMAT_4",
+					"name": "AUTOMATED_CONVERSION_FORMAT_4"
+				},
+				{
+					"default": "Noe/liz_school",
+					"label": "AUTOMATED_CONVERSION_PRESET_5",
+					"name": "AUTOMATED_CONVERSION_PRESET_5"
+				},
+				{
+					"default": "mp4",
+					"label": "AUTOMATED_CONVERSION_FORMAT_5",
+					"name": "AUTOMATED_CONVERSION_FORMAT_5"
+				},
+				{
+					"default": "liz_video_output",
+					"label": "AUTOMATED_CONVERSION_OUTPUT_SUBDIR_5",
+					"name": "AUTOMATED_CONVERSION_OUTPUT_SUBDIR_5"
+				},
+				{
+					"default": " --subtitle none",
+					"label": "AUTOMATED_CONVERSION_HANDBRAKE_CUSTOM_ARGS_5",
+					"name": "AUTOMATED_CONVERSION_HANDBRAKE_CUSTOM_ARGS_5"
+				}
+			],
+			"image": "jlesage/handbrake",
+			"logo": "https://upload.wikimedia.org/wikipedia/commons/d/d9/HandBrake_Icon.png",
+			"name": "handbrake",
+			"note": "Add /dev/dri device under Runtime \u0026 Resources to enable Intel Quick Sync",
+			"ports": [
+				"5800:5800/tcp",
+				"5801:5900/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Handbrake",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/containers/handbrake/config",
+					"container": "/config"
+				},
+				{
+					"bind": "/mnt/data/media/handbrake/output",
+					"container": "/output"
+				},
+				{
+					"bind": "/mnt/data",
+					"container": "/storage"
+				},
+				{
+					"bind": "/mnt/data/media/handbrake/watch/H.265_16RF",
+					"container": "/watch"
+				},
+				{
+					"bind": "/mnt/data/media/handbrake/watch/H.265_18RF",
+					"container": "/watch2"
+				},
+				{
+					"bind": "/mnt/data/media/handbrake/watch/H.265_20RF",
+					"container": "/watch3"
+				},
+				{
+					"bind": "/mnt/data/media/handbrake/watch/H.265_custom",
+					"container": "/watch4"
+				},
+				{
+					"bind": "/mnt/data/media/handbrake/watch/liz_video_watch",
+					"container": "/watch5"
+				}
+			]
+		},
+		{
+			"description": "Heimdall",
+			"env": [
+				{
+					"default": "65534",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "65533",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/heimdall",
+			"logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/heimdall-icon.png",
+			"name": "heimdall",
+			"ports": [
+				"2:80/tcp",
+				"4829:443/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Heimdall",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/containers/heimdall/config",
+					"container": "/config"
+				}
+			]
+		},
+		{
+			"description": "Jenkins",
+			"image": "jenkins/jenkins:lts",
+			"logo": "https://wiki.jenkins.io/download/attachments/2916393/headshot.png",
+			"name": "jenkins",
+			"note": "Don't know why but it works without having to set the UID and GUI on docker run to 65534:65533. Tried setting it and it has permissions issues. Maybe cause of how the /mnt/data mount is configured...",
+			"ports": [
+				"7494:8080/tcp",
+				"50000:50000/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Jenkins",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/etc/timezone",
+					"container": "/etc/timezone",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/containers/jenkins/jenkins_home",
+					"container": "/var/jenkins_home"
+				}
+			]
+		},
+		{
+			"description": "Medusa",
+			"env": [
+				{
+					"default": "65534",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "65533",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/medusa",
+			"logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/medusa-icon.png",
+			"name": "medusa",
+			"note": "Set network to transmission container after creation (though that's currently broken via portainer). In the meantime: docker run -d --restart=unless-stopped --name=medusa --network=container:transmission --label=com.centurylinklabs.watchtower.enable=false -e PUID=65534 -e PGID=65533 -v /etc/localtime:/etc/localtime -v /mnt/data/containers/medusa/config:/config -v /mnt/data/torrents/completed/medusa:/downloads -v /mnt/data/media/tv:/mnt/media/tv linuxserver/medusa",
+			"restart_policy": "unless-stopped",
+			"title": "Medusa",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/containers/medusa/config",
+					"container": "/config"
+				},
+				{
+					"bind": "/mnt/data/torrents/completed/medusa",
+					"container": "/downloads"
+				},
+				{
+					"bind": "/mnt/data/media/tv",
+					"container": "/mnt/media/tv"
+				}
+			]
+		},
+		{
+			"description": "Organizr",
+			"env": [
+				{
+					"default": "65534",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "65533",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/organizr",
+			"logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/organizr-icon.png",
+			"name": "organizr",
+			"ports": [
+				"9983:80/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Organizr",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/containers/organizr/config",
+					"container": "/config"
+				}
+			]
+		},
+		{
+			"description": "Plex",
+			"env": [
+				{
+					"default": "65534",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "65533",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"default": "000",
+					"label": "UMASK_SET",
+					"name": "UMASK_SET"
+				},
+				{
+					"default": "latest",
+					"label": "VERSION",
+					"name": "VERSION"
+				}
+			],
+			"image": "linuxserver/plex",
+			"logo": "https://cdn.imgbin.com/3/5/7/imgbin-roku-plex-television-computer-icons-hollywood-s-home-entertainment-7vYCHe3Z7nrVjSwWFLBMg4rQF.jpg",
+			"name": "plex",
+			"network": "host",
+			"note": "Add /dev/dri device under Runtime \u0026 Resources to enable Intel Quick Sync",
+			"restart_policy": "unless-stopped",
+			"title": "Plex (Linuxserver)",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/containers/plex/config",
+					"container": "/config"
+				},
+				{
+					"bind": "/mnt/data/media",
+					"container": "/mnt/media",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/media",
+					"container": "/media",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"description": "Plex",
+			"env": [
+				{
+					"default": "65534",
+					"label": "PLEX_UID",
+					"name": "PLEX_UID"
+				},
+				{
+					"default": "65533",
+					"label": "PLEX_GID",
+					"name": "PLEX_GID"
+				}
+			],
+			"image": "plexinc/pms-docker",
+			"logo": "https://cdn.imgbin.com/3/5/7/imgbin-roku-plex-television-computer-icons-hollywood-s-home-entertainment-7vYCHe3Z7nrVjSwWFLBMg4rQF.jpg",
+			"name": "plex",
+			"network": "host",
+			"note": "Add /dev/dri device under Runtime \u0026 Resources to enable Intel Quick Sync",
+			"restart_policy": "unless-stopped",
+			"title": "Plex (Plex Inc.)",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/containers/plex/config",
+					"container": "/config"
+				},
+				{
+					"bind": "/pool/lochnasmonster/media",
+					"container": "/mnt/media",
+					"readonly": true
+				},
+				{
+					"bind": "/pool/lochnasmonster/media",
+					"container": "/media",
+					"readonly": true
+				}
+			]
+		},
+    	{
+			"type": 3,
+			"title": "Selenium Grid 4",
+			"name": "selenium-grid",
+			"description": "Selenium Grid 4",
+			"logo": "https://www.selenium.dev/images/selenium_grid_logo_square.png",
+			"repository": {
+				"url": "https://github.com/noemartinez/templates",
+				"stackfile": "stacks/selenium-grid/docker-compose.yml"
+			}
+		},
+		{
+			"description": "sftp",
+			"env": [
+				{
+					"default": "user:kungfupanda:65534:65533",
+					"label": "SFTP_USERS",
+					"name": "SFTP_USERS"
+				}
+			],
+			"image": "atmoz/sftp",
+			"logo": "https://raw.githubusercontent.com/atmoz/sftp/master/openssh.png",
+			"name": "sftp",
+			"note": "",
+			"ports": [
+				"42722:22/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "SFTP",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/shared_files",
+					"container": "/home/user/files",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"description": "Tautulli",
+			"env": [
+				{
+					"default": "65534",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "65533",
+					"label": "PGID",
+					"name": "PGID"
+				}
+			],
+			"image": "linuxserver/tautulli",
+			"logo": "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/tautulli-icon.png",
+			"name": "tautulli",
+			"ports": [
+				"8282:8181/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Tautulli",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/containers/tautulli/config",
+					"container": "/config"
+				},
+				{
+					"bind": "/pool/lochnasmonster/containers/plex/config/Library/Application Support/Plex Media Server/Logs",
+					"container": "/logs",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"description": "Textbelt",
+			"env": [
+				{
+					"default": "smtp.gmail.com",
+					"label": "HOST",
+					"name": "HOST"
+				},
+				{
+					"default": "587",
+					"label": "MAIL_PORT",
+					"name": "MAIL_PORT"
+				},
+				{
+					"default": "marzib@gmail.com",
+					"label": "MAIL_USER",
+					"name": "MAIL_USER"
+				},
+				{
+					"default": "otmnfkbciyzlfgtk",
+					"label": "MAIL_PASS",
+					"name": "MAIL_PASS"
+				},
+				{
+					"default": "marzib@gmail.com",
+					"label": "FROM_ADDRESS",
+					"name": "FROM_ADDRESS"
+				},
+				{
+					"default": "Textbelt",
+					"label": "REALNAME",
+					"name": "REALNAME"
+				}
+			],
+			"image": "hexeth/textbelt-docker",
+			"logo": "https://storage.googleapis.com/indie-hackers.appspot.com/product-avatars/textbelt/A4c7IjVu32UUz2cXU4r0GO3ZKbk1",
+			"name": "textbelt",
+			"ports": [
+				"48071:9090/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Textbelt",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"description": "Transmission with OpenVPN",
+			"env": [
+				{
+					"default": "true",
+					"label": "CREATE_TUN_DEVICE",
+					"name": "CREATE_TUN_DEVICE"
+				},
+				{
+					"default": "WINDSCRIBE",
+					"label": "OPENVPN_PROVIDER",
+					"name": "OPENVPN_PROVIDER"
+				},
+				{
+					"default": "Vancouver-Vansterdam-udp",
+					"label": "OPENVPN_CONFIG",
+					"name": "OPENVPN_CONFIG"
+				},
+				{
+					"default": "marzib_349td7rq5",
+					"label": "OPENVPN_USERNAME",
+					"name": "OPENVPN_USERNAME"
+				},
+				{
+					"default": "cs7unhyex4",
+					"label": "OPENVPN_PASSWORD",
+					"name": "OPENVPN_PASSWORD"
+				},
+				{
+					"default": "true",
+					"label": "WEBPROXY_ENABLED",
+					"name": "WEBPROXY_ENABLED"
+				},
+				{
+					"default": "192.168.0.0/16",
+					"label": "LOCAL_NETWORK",
+					"name": "LOCAL_NETWORK"
+				},
+				{
+					"default": "65534",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "65533",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"default": "30",
+					"label": "TRANSMISSION_DOWNLOAD_QUEUE_SIZE",
+					"name": "TRANSMISSION_DOWNLOAD_QUEUE_SIZE"
+				},
+				{
+					"default": "240",
+					"label": "TRANSMISSION_PEER_LIMIT_GLOBAL",
+					"name": "TRANSMISSION_PEER_LIMIT_GLOBAL"
+				},
+				{
+					"default": "240",
+					"label": "TRANSMISSION_PEER_LIMIT_PER_TORRENT",
+					"name": "TRANSMISSION_PEER_LIMIT_PER_TORRENT"
+				},
+				{
+					"default": "true",
+					"label": "TRANSMISSION_PEER_PORT_RANDOM_ON_START",
+					"name": "TRANSMISSION_PEER_PORT_RANDOM_ON_START"
+				},
+				{
+					"default": "0",
+					"label": "TRANSMISSION_UMASK",
+					"name": "TRANSMISSION_UMASK"
+				},
+				{
+					"default": "/transmission-home",
+					"label": "TRANSMISSION_HOME",
+					"name": "TRANSMISSION_HOME"
+				},
+				{
+					"default": "true",
+					"label": "TRANSMISSION_WATCH_DIR_FORCE_GENERIC",
+					"name": "TRANSMISSION_WATCH_DIR_FORCE_GENERIC"
+				},
+				{
+					"default": "false",
+					"label": "GLOBAL_APPLY_PERMISSIONS",
+					"name": "GLOBAL_APPLY_PERMISSIONS"
+				}
+			],
+			"image": "haugene/transmission-openvpn",
+			"logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Transmission_Icon.svg/1024px-Transmission_Icon.svg.png",
+			"name": "transmission",
+			"note": "Need to set NET_ADMIN capability after creation. Had to add GLOBAL_APPLY_PERMISSIONS=false for it to not keep bootlooping.",
+			"ports": [
+				"9091:9091/tcp",
+				"8888:8888/tcp",
+				"8082:8081/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Transmission",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/torrents",
+					"container": "/data"
+				},
+				{
+					"bind": "/mnt/data/containers/transmission/transmission-home",
+					"container": "/transmission-home"
+				}
+			]
+		},
+		{
+			"description": "Ubooquity",
+			"env": [
+				{
+					"default": "65534",
+					"label": "PUID",
+					"name": "PUID"
+				},
+				{
+					"default": "65533",
+					"label": "PGID",
+					"name": "PGID"
+				},
+				{
+					"default": "2048",
+					"label": "MAXMEM",
+					"name": "MAXMEM"
+				}
+			],
+			"image": "linuxserver/ubooquity",
+			"logo": "https://4.bp.blogspot.com/-svxIRMNa4WU/V_6n9jMX5XI/AAAAAAAAZoQ/6jrlUFpb5D4a9THsCjsWm0_Bb9BQMZ2PwCLcB/s1600/ubooquity-logo%255B1%255D.png",
+			"name": "ubooquity",
+			"ports": [
+				"2202:2202/tcp",
+				"2203:2203/tcp"
+			],
+			"restart_policy": "unless-stopped",
+			"title": "Ubooquity",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/containers/ubooquity/config",
+					"container": "/config"
+				},
+				{
+					"bind": "/mnt/media/books/calibre/lochnasmonster",
+					"container": "/books",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/media/books/ubooquity/comics",
+					"container": "/comics",
+					"readonly": true
+				},
+				{
+					"bind": "/mnt/data/media/books/ubooquity/files",
+					"container": "/files",
+					"readonly": true
+				}
+			]
+		},
+		{
+			"description": "Watchtower",
+			"env": [
+				{
+					"default": "0 0 3 * * *",
+					"label": "WATCHTOWER_SCHEDULE",
+					"name": "WATCHTOWER_SCHEDULE"
+				},
+				{
+					"default": "email",
+					"label": "WATCHTOWER_NOTIFICATIONS",
+					"name": "WATCHTOWER_NOTIFICATIONS"
+				},
+				{
+					"default": "marzib+watchtower@gmail.com",
+					"label": "WATCHTOWER_NOTIFICATION_EMAIL_FROM",
+					"name": "WATCHTOWER_NOTIFICATION_EMAIL_FROM"
+				},
+				{
+					"default": "marzib+watchtower@gmail.com",
+					"label": "WATCHTOWER_NOTIFICATION_EMAIL_TO",
+					"name": "WATCHTOWER_NOTIFICATION_EMAIL_TO"
+				},
+				{
+					"default": "smtp.gmail.com",
+					"label": "WATCHTOWER_NOTIFICATION_EMAIL_SERVER",
+					"name": "WATCHTOWER_NOTIFICATION_EMAIL_SERVER"
+				},
+				{
+					"default": "587",
+					"label": "WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT",
+					"name": "WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT"
+				},
+				{
+					"default": "marzib@gmail.com",
+					"label": "WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER",
+					"name": "WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER"
+				},
+				{
+					"default": "bvrqhmfqtnmdnkct",
+					"label": "WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD",
+					"name": "WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD"
+				},
+				{
+					"default": "2",
+					"label": "WATCHTOWER_NOTIFICATION_EMAIL_DELAY",
+					"name": "WATCHTOWER_NOTIFICATION_EMAIL_DELAY"
+				},
+				{
+					"default": "true",
+					"label": "WATCHTOWER_DEBUG",
+					"name": "WATCHTOWER_DEBUG"
+				}
+			],
+			"image": "containrrr/watchtower",
+			"logo": "https://avatars3.githubusercontent.com/u/49166261?s=400\u0026v=4",
+			"name": "watchtower",
+			"restart_policy": "unless-stopped",
+			"title": "Watchtower",
+			"type": 1,
+			"volumes": [
+				{
+					"bind": "/etc/localtime",
+					"container": "/etc/localtime",
+					"readonly": true
+				},
+				{
+					"bind": "/var/run/docker.sock",
+					"container": "/var/run/docker.sock"
+				}
+			]
+		}
+	]
+}
